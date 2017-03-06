@@ -1,0 +1,51 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+/* Write program for finding numbers from given list with the next properties:
+-divisible by 3
+-not divisible by 5. List given by string[] args.*/
+namespace Midterm
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Int32[] L = new Int32[args.Length];
+
+            for (Int32 i = 0; i < args.Length; i++)
+            {
+                L[i] = Int32.Parse(args[i]);
+            }
+
+            for (int i = 0; i < args.Length; i++) 
+            {
+                if(L[i]%3 == 0)// number that can divided by 3
+
+				{
+                    Console.WriteLine(L[i]);
+				}
+            }
+
+            Console.WriteLine("not divisible by 5");
+
+            for (int i = 0; i < args.Length; i++) // not divisible by 5
+            {
+                if (L[i] % 5 != 0)
+                {
+                    Console.WriteLine(L[i]);
+                }
+            }
+
+            for (int i = 0; i < args.Length; i++) 
+            {
+                if (L[i]%3 == 0 && L[i] % 5 != 0)// number that are can be divided by 3 but not divisible by 5
+				{
+					Console.WriteLine(L[i]);
+                    Console.ReadKey();
+                }
+            }
+        }
+    }
+	}
