@@ -1,0 +1,96 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Threading;
+
+namespace Task3
+{
+	public class Point
+	{
+		public char sign;
+		public int x;
+		public int y;
+
+		public Point() { }
+
+		public Point(int x, int y)
+		{
+			this.x = x;
+			this.y = y;
+		}
+
+
+	}
+	class Program : WaveIt
+	{
+		public static Thread t = null;
+		static void Main(string[] args)
+		{
+			Console.SetWindowSize(80, 40);
+
+
+			Program p = new Program();
+			t = new Thread(new ThreadStart(p.Launch));
+			t.IsBackground = true;
+			t.Start();
+			p.Move(0, 1);
+			p.Launch();
+
+		}
+
+
+
+	}
+	public abstract class WaveIt : Point
+	{
+		public Point sin = new Point(40, 20);
+
+		public void Move(int dx, int dy)
+		{
+			sin.x += dx;
+			sin.y += dy;
+			Console.Clear();
+			DrawWave();
+			Launch();
+		}
+
+		public void DrawWave()
+		{
+
+			Console.SetCursorPosition(sin.x, sin.y);
+			Console.Write('o');
+
+		}
+		public int c = 0;
+		public void Launch()
+		{
+
+
+			while (true)
+			{
+				if (sin.y > 0 && sin.y < 60)
+				{
+					Move(0, c);
+				}
+				if (sin.y <= 0)
+				{
+					Move(0, c);
+					c = 5;
+
+				}
+				if (sin.y >= 60)
+				{
+					Move(0, c);
+
+					c = -5;
+				}
+				Thread.Sleep(150);
+				DrawWave();
+
+			}
+		}
+	}
+
+}
